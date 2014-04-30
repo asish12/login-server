@@ -643,6 +643,7 @@
     </beans>
 
     <beans profile="keystone">
+        <bean id="uaaController" class="org.cloudfoundry.identity.uaa.login.RemoteUaaController" parent="abstractRemoteUaaController" />
         <bean id="remoteAuthenticationManager" class="org.cloudfoundry.identity.uaa.keystone.KeystoneAuthenticationManager">
             <property name="loginUrl" value="${keystone.authentication.url:http://localhost:35357/v2.0/tokens}"/>
         </bean>
