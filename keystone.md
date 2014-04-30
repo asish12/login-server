@@ -12,6 +12,7 @@ Creating a test user (no tenant)
 
 
     export SERVICE_ENDPOINT=http://localhost:35357/v2.0
+    export SERVICE_TOKEN=ADMIN
     keystone user-create --name=marissa --pass=koala --email=marissa@test.org
     
 Getting an user token (simple authentication)
