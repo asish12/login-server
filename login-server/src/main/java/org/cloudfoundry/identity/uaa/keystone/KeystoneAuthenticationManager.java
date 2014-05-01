@@ -47,22 +47,13 @@ public class KeystoneAuthenticationManager extends RemoteUaaAuthenticationManage
 
     @Override
     protected KeystoneAuthenticationRequest getParameters(String username, String password) {
+        // {"auth":{"tenantName": "", "passwordCredentials": {"username": "marissa","password": "koala"}}}
         return new KeystoneAuthenticationRequest("", username, password);
     }
 
-
-//    {
-//        "auth": {
-//            "identity": {
-//                "methods": ["password"],
-//                "password": {
-//                    "user": {
-//                        "id": "0ca8f6"  , "password": "secrete"
-//                    }
-//                }
-//            }
-//        }
-//    }
+    
+    // {"auth":{"tenantName": "", "passwordCredentials": {"username": "marissa",
+    // "password": "koala"}}}
     public static class KeystoneAuthenticationRequest {
         private KeystoneAuthentication auth;
 
@@ -87,67 +78,50 @@ public class KeystoneAuthenticationManager extends RemoteUaaAuthenticationManage
     }
 
     public static class KeystoneAuthentication {
-        private String[] methods;
-        private String domain;
+        private String tenant;
         private KeystoneCredentials credentials;
 
-        public KeystoneAuthentication(String domain, String username, String password) {
-            this.domain = domain;
+        public KeystoneAuthentication(String tenant, String username, String password) {
+            this.tenant = tenant;
             this.credentials = new KeystoneCredentials(username, password);
         }
 
-        @JsonProperty("methods")
-        public String[] getMethods() {
-            return methods;
+        @JsonProperty("tenantName")
+        public String getTenant() {
+            return tenant;
         }
 
-        @JsonProperty("methods")
-        public void setMethods(String[] methods) {
-            this.methods = methods;
+        @JsonProperty("tenantName")
+        public void setTenant(String tenant) {
+            this.tenant = tenant;
         }
 
-        @JsonProperty("password")
+        @JsonProperty("passwordCredentials")
         public KeystoneCredentials getCredentials() {
             return credentials;
         }
 
-        @JsonProperty("password")
         public void setCredentials(KeystoneCredentials credentials) {
             this.credentials = credentials;
         }
     }
     
     public static class KeystoneCredentials {
-
-        private KeystoneUser user;
-        public KeystoneCredentials(String username, String password) {
-            user = new KeystoneUser(username, password);
-        }
-
-        public KeystoneUser getUser() {
-            return user;
-        }
-
-        public void setUser(KeystoneUser user) {
-            this.user = user;
-        }
-    }
-
-    public static class KeystoneUser {
-        private String id;
+        private String username;
         private String password;
 
-        public KeystoneUser(String id, String password) {
-            this.id = id;
+        public KeystoneCredentials(String username, String password) {
+            super();
+            this.username = username;
             this.password = password;
         }
 
-        public String getId() {
-            return id;
+        public String getUsername() {
+            return username;
         }
 
-        public void setId(String id) {
-            this.id = id;
+        public void setUsername(String username) {
+            this.username = username;
         }
 
         public String getPassword() {

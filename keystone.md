@@ -19,7 +19,7 @@ Getting an user token (simple authentication)
 ==================================
 
 
-    curl -v -d '{"auth": {"identity": {"methods": ["password"],"password": {"user": {"id": "marissa"  ,"password": "koala"}}}}}' -H "Content-type: application/json" http://localhost:35357/v3/auth/tokens
+    curl -v -d '{"auth":{"tenantName": "", "passwordCredentials": {"username": "marissa", "password": "koala"}}}' -H "Content-type: application/json" http://localhost:35357/v2.0/tokens    
 
 Results in 
 

@@ -150,7 +150,7 @@ spring_profiles: keystone
 
 keystone:
   authentication:
-    url: http://192.168.50.4:35357/v3/auth/tokens
+    url: http://192.168.50.4:35357/v2.0/tokens
 
 #ldap:
 #  profile:
