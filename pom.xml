@@ -19,12 +19,12 @@
     <parent>
         <groupId>org.cloudfoundry.identity</groupId>
         <artifactId>cloudfoundry-identity-parent</artifactId>
-        <version>1.6.3-SNAPSHOT</version>
+        <version>1.6.4-SNAPSHOT</version>
     </parent>
 
     <groupId>com.cloudfoundry.identity</groupId>
     <artifactId>cloudfoundry-login-server-parent</artifactId>
-    <version>1.6.1-SNAPSHOT</version>
+    <version>1.6.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Cloud Foundry Login</name>
     <description>Cloud Foundry Login Servers</description>
@@ -112,7 +112,7 @@
     </developers>
 
     <properties>
-        <identity.version>1.6.3-SNAPSHOT</identity.version>
+        <identity.version>1.6.4-SNAPSHOT</identity.version>
         <spring.version>4.0.3.RELEASE</spring.version>
         <spring.security.version>3.2.3.RELEASE</spring.security.version>
         <groupId>${project.groupId}</groupId>
@@ -132,12 +132,24 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <configuration>
+                    <properties>
+                        <property>
+                          <name>identity.version</name>
+                          <version>[${newIdentityVersion}]</version>
+                        </property>
+                    </properties>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -183,7 +195,7 @@
                                     <version>3.0.4</version>
                                 </requireMavenVersion>
                                 <requireJavaVersion>
-                                    <version>1.6</version>
+                                    <version>1.7</version>
                                 </requireJavaVersion>
                             </rules>
                         </configuration>

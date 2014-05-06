@@ -14,6 +14,9 @@ Creating a test user (no tenant)
     export SERVICE_ENDPOINT=http://localhost:35357/v2.0
     export SERVICE_TOKEN=ADMIN
     keystone user-create --name=marissa --pass=koala --email=marissa@test.org
+
+    keystone service-create --name=keystoneV3 --type=identity --description="Keystone Identity Service V3"
+    keystone endpoint-create  --service_id=<take ID output from above> --publicurl=http://localhost:5000/v3 --internalurl=http://localhost:5000/v3 --adminurl=http://localhost:35357/v3
     
 Getting an user token (simple authentication)
 ==================================
