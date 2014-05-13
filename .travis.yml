@@ -7,8 +7,10 @@ env:
   matrix:
     - SPRING_PROFILES=default,coverage
     - SPRING_PROFILES=default,saml,coverage
+    - SPRING_PROFILES=default,ldap,coverage
 before_install:
   - git pull --unshallow
+  - if [ "$SPRING_PROFILES" = "default,ldap,coverage" ]; then ./.install_ldap.sh; fi
   - wget -O tomcat.tar.gz http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.52/bin/apache-tomcat-7.0.52.tar.gz
   - unset GEM_PATH # for compatibility with the maven-sass-plugin
 install:
