@@ -8,14 +8,17 @@ env:
     - SPRING_PROFILES=default,coverage
     - SPRING_PROFILES=default,saml,coverage
     - SPRING_PROFILES=default,ldap,coverage
+    - SPRING_PROFILES=default,keystone,coverage
 before_install:
   - git pull --unshallow
   - if [ "$SPRING_PROFILES" = "default,ldap,coverage" ]; then ./scripts/ldap/install-ldap.sh; fi
+  - if [ "$SPRING_PROFILES" = "default,keystone,coverage" ]; then ./scripts/keystone/install-keystone.sh; fi
   - wget -O tomcat.tar.gz http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.52/bin/apache-tomcat-7.0.52.tar.gz
   - unset GEM_PATH # for compatibility with the maven-sass-plugin
 install:
   - $TRAVIS_BUILD_DIR/.apply_spring_profiles_to_login_yaml.sh $SPRING_PROFILES
   - if [ "$SPRING_PROFILES" = "default,ldap,coverage" ]; then ./scripts/ldap/configure-manifest.sh; fi
+  - if [ "$SPRING_PROFILES" = "default,keystone,coverage" ]; then ./scripts/keystone/configure-manifest.sh; fi
   - cat src/main/resources/login.yml
   - mvn test-compile -P coverage --quiet
   - mkdir -p target/tomcat

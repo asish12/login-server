@@ -193,3 +193,16 @@ keystone:
 #    passwordAttributeName: userPassword
 #    passwordEncoder: org.cloudfoundry.identity.uaa.login.ldap.DynamicPasswordComparator
 #    localPasswordCompare: true
+#spring_profiles: ldap
+ldap:
+  profile:
+    file:ldap/ldap-search-and-bind.xml
+  base:  
+    url: 'ldap://localhost:389/'
+    userDn: 'cn=admin,dc=test,dc=com'
+    password: 'password'
+    searchBase: 'dc=test,dc=com' 
+    searchFilter: 'cn={0}'
+    passwordAttributeName: userPassword
+    passwordEncoder: org.cloudfoundry.identity.uaa.login.ldap.DynamicPasswordComparator
+    localPasswordCompare: true
